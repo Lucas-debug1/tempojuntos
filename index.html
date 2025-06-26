@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nosso Tempo Juntos 💚</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #e6f2e6, #fdfcf7);
+      color: #2e5339;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    .counter {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      font-size: 1.2rem;
+      opacity: 0;
+      animation: fadeIn 3s ease 0.5s forwards;
+    }
+
+    .time-box {
+      background: #a2d8a7cc;
+      padding: 1rem 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      min-width: 90px;
+      transition: transform 0.3s ease;
+    }
+
+    .time-box:hover {
+      transform: scale(1.05);
+    }
+
+    .number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #205c3b;
+    }
+
+    .label {
+      font-size: 0.9rem;
+      color: #4b7054;
+    }
+
+    .heart-button {
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background-color: #d14e63;
+      color: rgb(203, 243, 166);
+      border: none;
+      border-radius: 2rem;
+      cursor: pointer;
+      animation: pulse 1.5s infinite;
+      box-shadow: 0 4px 12px rgba(209, 78, 99, 0.3);
+      transition: background-color 0.3s;
+    }
+
+    .heart-button:hover {
+      background-color: #bb3b50;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(209, 78, 99, 0.7);
+      }
+      70% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 10px rgba(209, 78, 99, 0);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(209, 78, 99, 0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Estamos juntos há...</h1>
+  <div class="counter" id="counter"></div>
+  <button class="heart-button">Eu te amo, Minha Sarinha❤️</button>
+
+  <script>
+    const startDate = new Date("2025-06-14T00:00:00"); // Altere
+
+    function updateCounter() {
+      const now = new Date();
+      let diff = now - startDate;
+
+      let seconds = Math.floor(diff / 1000);
+      let minutes = Math.floor(seconds / 60);
+      let hours = Math.floor(minutes / 60);
+      let days = Math.floor(hours / 24);
+      let months = Math.floor(days / 30.4375);
+      let years = Math.floor(months / 12);
+
+      months = months % 12;
+      days = days % 30.4375 | 0;
+      hours = hours % 24;
+      minutes = minutes % 60;
+      seconds = seconds % 60;
+
+      const counter = document.getElementById("counter");
+      counter.innerHTML = `
+        <div class="time-box"><div class="number">${years}</div><div class="label">Anos</div></div>
+        <div class="time-box"><div class="number">${months}</div><div class="label">Meses</div></div>
+        <div class="time-box"><div class="number">${days}</div><div class="label">Dias</div></div>
+        <div class="time-box"><div class="number">${hours}</div><div class="label">Horas</div></div>
+        <div class="time-box"><div class="number">${minutes}</div><div class="label">Minutos</div></div>
+        <div class="time-box"><div class="number">${seconds}</div><div class="label">Segundos</div></div>
+      `;
+    }
+
+    updateCounter();
+    setInterval(updateCounter, 1000);
+  </script>
+</body>
+</html>
