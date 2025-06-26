@@ -17,6 +17,8 @@
       align-items: center;
       justify-content: center;
       z-index: 0;
+      text-align: center;
+      padding: 0 1rem;
     }
 
     body::before {
@@ -35,6 +37,40 @@
       font-size: 2.5rem;
       margin-bottom: 1rem;
       text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    }
+
+    .love-message {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      color: #a5d6a7;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .heart-green {
+      color: #4caf50;
+      font-size: 2.2rem;
+      animation: pulseGreen 1.5s infinite;
+      user-select: none;
+    }
+
+    @keyframes pulseGreen {
+      0% {
+        transform: scale(1);
+        text-shadow: 0 0 8px #4caf50aa;
+      }
+      50% {
+        transform: scale(1.2);
+        text-shadow: 0 0 15px #4caf50ff;
+      }
+      100% {
+        transform: scale(1);
+        text-shadow: 0 0 8px #4caf50aa;
+      }
     }
 
     .counter {
@@ -96,12 +132,17 @@
   </style>
 </head>
 <body>
+  <div class="love-message">
+    Eu te amo, minha Sarinha
+    <span class="heart-green">💚</span>
+  </div>
+
   <h1>Estamos juntos há...</h1>
   <div class="counter" id="counter"></div>
-  <button class="heart-button">Eu te amo, minha Sarinha❤️</button>
+  <button class="heart-button">Te amo ❤️</button>
 
   <script>
-    const startDate = new Date("2025-06-14T00:00:00");
+    const startDate = new Date("2025-06-14T00:00:00"); 
 
     function updateCounter() {
       const now = new Date();
