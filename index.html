@@ -2,62 +2,67 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Nosso Tempo Juntos💚</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #e6f2e6, #fdfcf7);
-      color: #2e5339;
+      font-family: sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      color: white;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      overflow: hidden;
+      z-index: 0;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.pinimg.com/originals/5d/b1/8e/5db18e2bf60cc7b6180733ff00b53821.gif') no-repeat center center/cover;
+      filter: brightness(0.5);
+      z-index: -1;
+      pointer-events: none;
     }
 
     h1 {
       font-size: 2.5rem;
       margin-bottom: 1rem;
-      opacity: 0;
-      animation: fadeIn 2s ease forwards;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
     }
 
     .counter {
       display: flex;
-      gap: 1rem;
       flex-wrap: wrap;
       justify-content: center;
-      font-size: 1.2rem;
-      opacity: 0;
-      animation: fadeIn 3s ease 0.5s forwards;
+      gap: 1rem;
+      font-weight: bold;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
     }
 
     .time-box {
-      background: #a2d8a7cc;
+      background: rgba(0,0,0,0.4);
       padding: 1rem 1.5rem;
       border-radius: 1rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      text-align: center;
       min-width: 90px;
-      transition: transform 0.3s ease;
-    }
-
-    .time-box:hover {
-      transform: scale(1.05);
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
 
     .number {
       font-size: 2rem;
-      font-weight: bold;
-      color: #205c3b;
+      color: #a5d6a7;
     }
 
     .label {
       font-size: 0.9rem;
-      color: #4b7054;
+      color: #c8e6c9;
     }
 
     .heart-button {
@@ -65,23 +70,13 @@
       padding: 1rem 2rem;
       font-size: 1.2rem;
       background-color: #d14e63;
-      color: rgb(203, 243, 166);
+      color: white;
       border: none;
       border-radius: 2rem;
       cursor: pointer;
       animation: pulse 1.5s infinite;
-      box-shadow: 0 4px 12px rgba(209, 78, 99, 0.3);
-      transition: background-color 0.3s;
-    }
-
-    .heart-button:hover {
-      background-color: #bb3b50;
-    }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
+      box-shadow: 0 4px 12px rgba(209, 78, 99, 0.6);
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     }
 
     @keyframes pulse {
@@ -103,46 +98,10 @@
 <body>
   <h1>Estamos juntos há...</h1>
   <div class="counter" id="counter"></div>
-  <button class="heart-button"> eu te amo, minha Sarinha❤️</button>
-
-<style>
-.heart-button {
-  margin-top: 2rem;
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-  background-color: #d14e63;
-  color: white;
-  border: none;
-  border-radius: 2rem;
-  cursor: pointer;
-  animation: pulse 1.5s infinite;
-  box-shadow: 0 4px 12px rgba(209, 78, 99, 0.3);
-  transition: background-color 0.3s;
-}
-
-.heart-button:hover {
-  background-color: #bb3b50;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(209, 78, 99, 0.7);
-  }
-  70% {
-    transform: scale(1.1);
-    box-shadow: 0 0 0 10px rgba(209, 78, 99, 0);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(209, 78, 99, 0);
-  }
-}
-</style>
-
+  <button class="heart-button">Eu te amo, minha Sarinha❤️</button>
 
   <script>
-    const startDate = new Date("2025-06-14T00:00:00"); // Altere
+    const startDate = new Date("2025-06-14T00:00:00");
 
     function updateCounter() {
       const now = new Date();
