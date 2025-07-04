@@ -129,6 +129,53 @@
         box-shadow: 0 0 0 0 rgba(209, 78, 99, 0);
       }
     }
+
+    /* Caixinha flutuante do aniversário */
+    .floating-birthday-box {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(209, 78, 99, 0.95);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+      text-align: center;
+      animation: float 3s ease-in-out infinite;
+      z-index: 100;
+    }
+
+    .floating-birthday-box h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1rem;
+    }
+
+    .birthday-timer {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .birthday-unit {
+      background: rgba(255,255,255,0.2);
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      min-width: 50px;
+    }
+
+    .birthday-unit .num {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .birthday-unit .label {
+      font-size: 0.7rem;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
   </style>
 </head>
 <body>
@@ -139,6 +186,13 @@
 
   <h1>Estamos juntos há...</h1>
   <div class="counter" id="counter"></div>
+
+  <!-- Caixinha flutuante -->
+  <div class="floating-birthday-box" id="birthday-box">
+    <h2>🎂 Aniversário da minha Princesa 💚</h2>
+    <div class="birthday-timer" id="birthday-timer"></div>
+  </div>
+
   <script>
     const startDate = new Date("2025-06-14T00:00:00"); 
 
@@ -172,6 +226,34 @@
 
     updateCounter();
     setInterval(updateCounter, 1000);
+
+    const birthdayDate = new Date("2025-08-24T00:00:00");
+
+    function updateBirthdayTimer() {
+      const now = new Date();
+      let diff = birthdayDate - now;
+
+      if (diff < 0) {
+        document.getElementById('birthday-timer').innerHTML = 
+          "<div class='birthday-unit'><div class='num'>🎉</div><div class='label'>Chegou!</div></div>";
+        clearInterval(birthdayInterval);
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('birthday-timer').innerHTML = `
+        <div class="birthday-unit"><div class="num">${days}</div><div class="label">Dias</div></div>
+        <div class="birthday-unit"><div class="num">${hours.toString().padStart(2, '0')}</div><div class="label">Hrs</div></div>
+        <div class="birthday-unit"><div class="num">${minutes.toString().padStart(2, '0')}</div><div class="label">Min</div></div>
+        <div class="birthday-unit"><div class="num">${seconds.toString().padStart(2, '0')}</div><div class="label">Seg</div></div>`;
+    }
+
+    updateBirthdayTimer();
+    const birthdayInterval = setInterval(updateBirthdayTimer, 1000);
   </script>
 </body>
 </html>
