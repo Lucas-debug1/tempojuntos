@@ -160,6 +160,30 @@
       .birthday-unit { min-width: 40px; padding: 0.4rem; }
       .floating-birthday-box { font-size: 0.8rem; padding: 0.6rem 0.8rem; }
     }
+    body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.gptmaker-float-launcher {
+  position: fixed !important;
+  top: 10px !important;
+  right: 10px !important;
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 50% !important;
+  z-index: 10000 !important;
+  display: block !important;
+  opacity: 1 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
   </style>
 </head>
 <body>
@@ -237,8 +261,6 @@
 
     updateBirthdayTimer();
     const birthdayInterval = setInterval(updateBirthdayTimer, 1000);
-
-    // Alternância de GIFs de fundo
     const gifs = [
       'https://i.pinimg.com/originals/5d/b1/8e/5db18e2bf60cc7b6180733ff00b53821.gif',
       'https://64.media.tumblr.com/5bf1a035e041d1d7b7bdf5ccde2c1aba/tumblr_o9eplefSf31vnc4axo1_500.gifv'
