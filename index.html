@@ -8,6 +8,7 @@
     :root {
       --background-gif: url('https://i.pinimg.com/originals/5d/b1/8e/5db18e2bf60cc7b6180733ff00b53821.gif');
     }
+
     body {
       margin: 0;
       font-family: sans-serif;
@@ -18,30 +19,31 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 4rem 1rem 2rem;
+      padding: 3rem 1rem 2rem;
       color: white;
-      position: relative;
       text-align: center;
       overflow-x: hidden;
+      position: relative;
     }
+
     body::after {
       content: "";
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.25);
+      background: rgba(0, 0, 0, 0.3);
       z-index: 0;
       pointer-events: none;
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       margin-bottom: 1rem;
       z-index: 1;
       text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
     }
 
     .love-message {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       margin-bottom: 1.5rem;
       font-weight: 600;
       color: #a5d6a7;
@@ -50,6 +52,8 @@
       align-items: center;
       gap: 0.5rem;
       z-index: 1;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .heart-green {
@@ -68,43 +72,44 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1rem;
+      gap: 0.8rem;
       font-weight: bold;
       text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
       z-index: 1;
     }
 
     .time-box {
-      background: rgba(0,0,0,0.4);
-      padding: 1rem 1.5rem;
+      background: rgba(0,0,0,0.5);
+      padding: 0.9rem 1.2rem;
       border-radius: 1rem;
-      min-width: 90px;
+      min-width: 80px;
       text-align: center;
       box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
 
     .number {
-      font-size: 2rem;
+      font-size: 1.8rem;
       color: #a5d6a7;
     }
 
     .label {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #c8e6c9;
     }
 
     .floating-birthday-box {
       position: fixed;
-      bottom: 20px;
-      left: 20px; /* MUDOU DE right PARA left */
+      bottom: 90px;
+      right: 20px;
       background: rgba(209, 78, 99, 0.95);
       color: white;
-      padding: 1rem 1.5rem;
+      padding: 1rem 1.2rem;
       border-radius: 1rem;
       box-shadow: 0 8px 16px rgba(0,0,0,0.4);
       text-align: center;
       animation: float 3s ease-in-out infinite;
       z-index: 2;
+      max-width: 300px;
     }
 
     .birthday-timer {
@@ -112,18 +117,19 @@
       gap: 0.5rem;
       justify-content: center;
       flex-wrap: wrap;
+      margin-top: 0.5rem;
     }
 
     .birthday-unit {
       background: rgba(255,255,255,0.2);
-      padding: 0.5rem;
+      padding: 0.4rem;
       border-radius: 0.5rem;
       min-width: 50px;
       text-align: center;
     }
 
     .birthday-unit .num {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: bold;
     }
 
@@ -136,17 +142,40 @@
       50% { transform: translateY(-10px); }
     }
 
-    @media (max-width: 768px) {
-      h1 { font-size: 2rem; }
-      .love-message { font-size: 1.4rem; flex-direction: column; gap: 0.2rem; }
-      .counter { gap: 0.5rem; }
-      .time-box { padding: 0.6rem 1rem; min-width: 70px; }
-      .number { font-size: 1.5rem; }
-      .label { font-size: 0.75rem; }
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+      .love-message {
+        font-size: 1.3rem;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+      .counter {
+        gap: 0.5rem;
+      }
+      .time-box {
+        padding: 0.6rem 1rem;
+        min-width: 70px;
+      }
+      .number {
+        font-size: 1.4rem;
+      }
+      .label {
+        font-size: 0.7rem;
+      }
       .floating-birthday-box {
-        bottom: 10px;
-        left: 10px; /* Também ajustado para dispositivos móveis */
-        padding: 0.8rem 1.2rem;
+        bottom: 80px;
+        right: 10px;
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+      }
+      .birthday-unit {
+        min-width: 45px;
+        padding: 0.3rem;
+      }
+      .birthday-unit .num {
+        font-size: 1rem;
       }
     }
   </style>
@@ -165,7 +194,7 @@
     <div class="birthday-timer" id="birthday-timer"></div>
   </div>
 
-  <!-- Script do balão flutuante do chat -->
+  <!-- Script do chat flutuante -->
   <script async src="https://app.gptmaker.ai/widget/3E40A2B7B2F9224B1436FAB6FA94CC1E/float.js"></script>
 
   <script>
