@@ -11,7 +11,7 @@
     body {
       margin: 0;
       font-family: sans-serif;
-      height: 100vh;
+      min-height: 100vh;
       overflow-x: hidden;
       position: relative;
       color: white;
@@ -19,19 +19,26 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      z-index: 0;
       text-align: center;
       padding: 5rem 1rem 1rem;
       background: var(--background-gif) no-repeat center center/cover;
       transition: background-image 1s ease-in-out;
     }
-
+    /* Camada escura sobre o fundo */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+      pointer-events: none;
+    }
     h1 {
       font-size: 2.5rem;
       margin-bottom: 1rem;
+      z-index: 1;
       text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
     }
-
     .love-message {
       font-size: 1.8rem;
       margin-bottom: 1.5rem;
@@ -40,31 +47,28 @@
       text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
       display: flex;
       align-items: center;
-      justify-content: center;
       gap: 0.5rem;
+      z-index: 1;
     }
-
     .heart-green {
       color: #4caf50;
       font-size: 2.2rem;
       animation: pulseGreen 1.5s infinite;
     }
-
     @keyframes pulseGreen {
       0% { transform: scale(1); text-shadow: 0 0 8px #4caf50aa; }
       50% { transform: scale(1.2); text-shadow: 0 0 15px #4caf50ff; }
       100% { transform: scale(1); text-shadow: 0 0 8px #4caf50aa; }
     }
-
     .counter {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 1rem;
       font-weight: bold;
+      z-index: 1;
       text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
     }
-
     .time-box {
       background: rgba(0,0,0,0.4);
       padding: 1rem 1.5rem;
@@ -73,17 +77,14 @@
       text-align: center;
       box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
-
     .number {
       font-size: 2rem;
       color: #a5d6a7;
     }
-
     .label {
       font-size: 0.9rem;
       color: #c8e6c9;
     }
-
     .floating-birthday-box {
       position: fixed;
       bottom: 20px;
@@ -95,41 +96,13 @@
       box-shadow: 0 8px 16px rgba(0,0,0,0.4);
       text-align: center;
       animation: float 3s ease-in-out infinite;
-      z-index: 99;
+      z-index: 1;
     }
-
-    .floating-birthday-box h2 {
-      margin: 0 0 0.5rem;
-      font-size: 1rem;
-    }
-
-    .birthday-timer {
-      display: flex;
-      gap: 0.5rem;
-      justify-content: center;
-    }
-
-    .birthday-unit {
-      background: rgba(255,255,255,0.2);
-      padding: 0.5rem;
-      border-radius: 0.5rem;
-      min-width: 50px;
-    }
-
-    .birthday-unit .num {
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
-
-    .birthday-unit .label {
-      font-size: 0.7rem;
-    }
-
     @keyframes float {
       0%,100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
-
+    /* Estilo garantido para o botão de chat ficar visível */
     .gptmaker-float-launcher {
       position: fixed !important;
       top: 10px !important;
@@ -137,11 +110,11 @@
       width: 42px !important;
       height: 42px !important;
       border-radius: 50% !important;
-      z-index: 999 !important;
-      transform: scale(0.8);
+      z-index: 10000 !important;
+      display: block !important;
+      opacity: 1 !important;
       box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     }
-
     @media (max-width: 768px) {
       h1 { font-size: 2rem; }
       .love-message { font-size: 1.4rem; flex-direction: column; gap: 0.2rem; }
@@ -151,7 +124,6 @@
       .label { font-size: 0.75rem; }
       .floating-birthday-box { bottom: 10px; right: 10px; padding: 0.8rem 1.2rem; }
     }
-
     @media (max-width: 480px) {
       h1 { font-size: 1.6rem; }
       .love-message { font-size: 1.2rem; }
@@ -160,30 +132,6 @@
       .birthday-unit { min-width: 40px; padding: 0.4rem; }
       .floating-birthday-box { font-size: 0.8rem; padding: 0.6rem 0.8rem; }
     }
-    body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 0;
-  pointer-events: none;
-}
-
-.gptmaker-float-launcher {
-  position: fixed !important;
-  top: 10px !important;
-  right: 10px !important;
-  width: 42px !important;
-  height: 42px !important;
-  border-radius: 50% !important;
-  z-index: 10000 !important;
-  display: block !important;
-  opacity: 1 !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
   </style>
 </head>
 <body>
@@ -191,10 +139,8 @@
     Eu te amo, minha Sarinha
     <span class="heart-green">💚</span>
   </div>
-
   <h1>Estamos juntos há...</h1>
   <div class="counter" id="counter"></div>
-
   <div class="floating-birthday-box" id="birthday-box">
     <h2>🎂 Aniversário da minha Princesa 💚</h2>
     <div class="birthday-timer" id="birthday-timer"></div>
@@ -202,77 +148,52 @@
 
   <script>
     const startDate = new Date("2025-06-14T00:00:00");
-
     function updateCounter() {
-      const now = new Date();
-      let diff = now - startDate;
-
-      let seconds = Math.floor(diff / 1000);
-      let minutes = Math.floor(seconds / 60);
-      let hours = Math.floor(minutes / 60);
-      let days = Math.floor(hours / 24);
-      let months = Math.floor(days / 30.4375);
-      let years = Math.floor(months / 12);
-
-      months = months % 12;
-      days = days % 30.4375 | 0;
-      hours = hours % 24;
-      minutes = minutes % 60;
-      seconds = seconds % 60;
-
-      const counter = document.getElementById("counter");
-      counter.innerHTML = `
-        <div class="time-box"><div class="number">${years}</div><div class="label">Anos</div></div>
-        <div class="time-box"><div class="number">${months}</div><div class="label">Meses</div></div>
-        <div class="time-box"><div class="number">${days}</div><div class="label">Dias</div></div>
-        <div class="time-box"><div class="number">${hours}</div><div class="label">Horas</div></div>
-        <div class="time-box"><div class="number">${minutes}</div><div class="label">Minutos</div></div>
-        <div class="time-box"><div class="number">${seconds}</div><div class="label">Segundos</div></div>
-      `;
+      const now = new Date(), diff = now - startDate;
+      let s = Math.floor(diff/1000), m=Math.floor(s/60), h=Math.floor(m/60),
+          d=Math.floor(h/24), mo=Math.floor(d/30.4375), y=Math.floor(mo/12);
+      mo%=12; d%=30.4375|0; h%=24; m%=60; s%=60;
+      document.getElementById("counter").innerHTML = `
+        <div class="time-box"><div class="number">${y}</div><div class="label">Anos</div></div>
+        <div class="time-box"><div class="number">${mo}</div><div class="label">Meses</div></div>
+        <div class="time-box"><div class="number">${d}</div><div class="label">Dias</div></div>
+        <div class="time-box"><div class="number">${h}</div><div class="label">Horas</div></div>
+        <div class="time-box"><div class="number">${m}</div><div class="label">Minutos</div></div>
+        <div class="time-box"><div class="number">${s}</div><div class="label">Segundos</div></div>`;
     }
+    updateCounter(); setInterval(updateCounter,1000);
 
-    updateCounter();
-    setInterval(updateCounter, 1000);
-
-    const birthdayDate = new Date("2025-08-24T00:00:00");
-
-    function updateBirthdayTimer() {
-      const now = new Date();
-      let diff = birthdayDate - now;
-
-      if (diff < 0) {
-        document.getElementById('birthday-timer').innerHTML = 
-          "<div class='birthday-unit'><div class='num'>🎉</div><div class='label'>Chegou!</div></div>";
-        clearInterval(birthdayInterval);
-        return;
+    const bdDate = new Date("2025-08-24T00:00:00");
+    function updateBirthday() {
+      const now = new Date(), diff=bdDate - now;
+      if(diff<0) {
+        document.getElementById("birthday-timer").innerHTML = `<div class="birthday-unit"><div class="num">🎉</div><div class="label">Chegou!</div></div>`;
+        return clearInterval(bdInterval);
       }
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-      document.getElementById('birthday-timer').innerHTML = `
-        <div class="birthday-unit"><div class="num">${days}</div><div class="label">Dias</div></div>
-        <div class="birthday-unit"><div class="num">${hours.toString().padStart(2, '0')}</div><div class="label">Hrs</div></div>
-        <div class="birthday-unit"><div class="num">${minutes.toString().padStart(2, '0')}</div><div class="label">Min</div></div>
-        <div class="birthday-unit"><div class="num">${seconds.toString().padStart(2, '0')}</div><div class="label">Seg</div></div>`;
+      const d=Math.floor(diff/86400000),
+            h=Math.floor((diff%86400000)/3600000),
+            m=Math.floor((diff%3600000)/60000),
+            s=Math.floor((diff%60000)/1000);
+      document.getElementById("birthday-timer").innerHTML = `
+        <div class="birthday-unit"><div class="num">${d}</div><div class="label">Dias</div></div>
+        <div class="birthday-unit"><div class="num">${h.toString().padStart(2,'0')}</div><div class="label">Hrs</div></div>
+        <div class="birthday-unit"><div class="num">${m.toString().padStart(2,'0')}</div><div class="label">Min</div></div>
+        <div class="birthday-unit"><div class="num">${s.toString().padStart(2,'0')}</div><div class="label">Seg</div></div>`;
     }
+    updateBirthday(); const bdInterval = setInterval(updateBirthday,1000);
 
-    updateBirthdayTimer();
-    const birthdayInterval = setInterval(updateBirthdayTimer, 1000);
     const gifs = [
       'https://i.pinimg.com/originals/5d/b1/8e/5db18e2bf60cc7b6180733ff00b53821.gif',
       'https://64.media.tumblr.com/5bf1a035e041d1d7b7bdf5ccde2c1aba/tumblr_o9eplefSf31vnc4axo1_500.gifv'
     ];
-    let currentGif = 0;
-
-    setInterval(() => {
-      currentGif = (currentGif + 1) % gifs.length;
-      document.documentElement.style.setProperty('--background-gif', `url('${gifs[currentGif]}')`);
+    let idx = 0;
+    setInterval(()=> {
+      idx = (idx+1)%gifs.length;
+      document.documentElement.style.setProperty('--background-gif', `url('${gifs[idx]}')`);
     }, 10000);
   </script>
 
-  <script async src="https://app.gptmaker.ai/widget/3E408EC74DD082EFC559FAB6FA94CC1E/float.js"></script>
+  <!-- Carregamento do GPTMaker sem ‘async’ para garantir execução -->
+  <script src="https://app.gptmaker.ai/widget/3E408EC74DD082EFC559FAB6FA94CC1E/float.js"></script>
 </body>
 </html>
