@@ -185,13 +185,16 @@
     <h2>🎂 Aniversário da minha Princesa 💚</h2>
     <div class="birthday-timer" id="birthday-timer"></div>
   </div>
-
-  <!-- Resetar mensagens do chat ao recarregar a página -->
   <script>
+  document.addEventListener("DOMContentLoaded", function() {
     localStorage.removeItem('gptmaker_widget_3E40B191D4C490018231B22FDC791FD9');
-  </script>
-  <script async src="https://app.gptmaker.ai/widget/3E40B191D4C490018231B22FDC791FD9/float.js"></script>
 
+    const script = document.createElement('script');
+    script.src = "https://app.gptmaker.ai/widget/3E40B191D4C490018231B22FDC791FD9/float.js";
+    script.async = true;
+    document.body.appendChild(script);
+  });
+</script>
   <script>
     const startDate = new Date("2025-06-14T00:00:00");
     function updateCounter() {
