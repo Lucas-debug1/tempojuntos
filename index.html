@@ -278,9 +278,10 @@
     <h2>🎂 Aniversário da minha Princesa 💚</h2>
     <div class="birthday-timer" id="birthday-timer"></div>
   </div>
+  <!-- ...tudo igual até a parte final... -->
 
   <script>
-    const startDate = new Date("2025-06-14T00:00:00"); 
+    const startDate = new Date("2025-06-14T00:00:00");
 
     function updateCounter() {
       const now = new Date();
@@ -341,5 +342,38 @@
     updateBirthdayTimer();
     const birthdayInterval = setInterval(updateBirthdayTimer, 1000);
   </script>
+  <script>
+    const gifs = [
+      'https://i.pinimg.com/originals/5d/b1/8e/5db18e2bf60cc7b6180733ff00b53821.gif',
+      'https://64.media.tumblr.com/5bf1a035e041d1d7b7bdf5ccde2c1aba/tumblr_o9eplefSf31vnc4axo1_500.gifv'
+    ];
+    let currentGifIndex = 0;
+
+    function changeBackground() {
+      currentGifIndex = (currentGifIndex + 1) % gifs.length;
+      document.body.style.setProperty('--background-gif', `url('${gifs[currentGifIndex]}')`);
+      document.querySelector("style").textContent += `
+        body::before {
+          background-image: var(--background-gif) !important;
+        }
+      `;
+    }
+
+    // Inicializa com o primeiro GIF
+    document.body.style.setProperty('--background-gif', `url('${gifs[0]}')`);
+    document.querySelector("style").textContent += `
+      body::before {
+        background-image: var(--background-gif) !important;
+      }
+    `;
+
+    setInterval(changeBackground, 10000); // troca a cada 10 segundos
+  </script>
+
+  <script async src="https://app.gptmaker.ai/widget/3E408EC74DD082EFC559FAB6FA94CC1E/float.js"></script>
+</body>
+</html>
+</body>
+</html>
 </body>
 </html>
