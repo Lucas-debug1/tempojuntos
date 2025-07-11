@@ -94,54 +94,55 @@
     }
 
     .floating-birthday-box {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  background: rgba(209, 78, 99, 0.95);
-  color: white;
-  padding: 0.7rem 1rem;
-  border-radius: 1rem;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-  text-align: center;
-  z-index: 2;
-  width: auto;
-  max-width: 95%;
-  font-size: 0.85rem;
-  animation: float 3s ease-in-out infinite;
-}
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(209, 78, 99, 0.95);
+      color: white;
+      padding: 0.7rem 1rem;
+      border-radius: 1rem;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+      text-align: center;
+      z-index: 2;
+      width: auto;
+      max-width: 95%;
+      font-size: 0.85rem;
+      animation: float 3s ease-in-out infinite;
+    }
 
-.floating-birthday-box h2 {
-  font-size: 0.85rem;
-  margin-bottom: 0.5rem;
-  line-height: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+    .floating-birthday-box h2 {
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      line-height: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-.birthday-timer {
-  display: flex;
-  gap: 0.4rem;
-  justify-content: center;
-  flex-wrap: nowrap;
-}
+    .birthday-timer {
+      display: flex;
+      gap: 0.4rem;
+      justify-content: center;
+      flex-wrap: nowrap;
+    }
 
-.birthday-unit {
-  background: rgba(255,255,255,0.15);
-  padding: 0.4rem 0.5rem;
-  border-radius: 0.5rem;
-  min-width: 55px;
-  text-align: center;
-}
+    .birthday-unit {
+      background: rgba(255,255,255,0.15);
+      padding: 0.4rem 0.5rem;
+      border-radius: 0.5rem;
+      min-width: 55px;
+      text-align: center;
+    }
 
-.birthday-unit .num {
-  font-size: 1rem;
-  font-weight: bold;
-}
+    .birthday-unit .num {
+      font-size: 1rem;
+      font-weight: bold;
+    }
 
-.birthday-unit .label {
-  font-size: 0.65rem;
-}
+    .birthday-unit .label {
+      font-size: 0.65rem;
+    }
+
     @keyframes float {
       0%,100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
@@ -185,8 +186,11 @@
     <div class="birthday-timer" id="birthday-timer"></div>
   </div>
 
-  <!-- Chat flutuante -->
-  <script async src="https://app.gptmaker.ai/widget/3E40A2B7B2F9224B1436FAB6FA94CC1E/float.js"></script>
+  <!-- Resetar mensagens do chat ao recarregar a página -->
+  <script>
+    localStorage.removeItem('gptmaker_widget_3E40B191D4C490018231B22FDC791FD9');
+  </script>
+  <script async src="https://app.gptmaker.ai/widget/3E40B191D4C490018231B22FDC791FD9/float.js"></script>
 
   <script>
     const startDate = new Date("2025-06-14T00:00:00");
