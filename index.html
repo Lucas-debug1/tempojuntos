@@ -8,7 +8,6 @@
     :root {
       --background-gif: url('https://i.pinimg.com/originals/5d/b1/8e/5db18e2bf60cc7b6180733ff00b53821.gif');
     }
-
     body {
       margin: 0;
       font-family: sans-serif;
@@ -19,31 +18,30 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 3rem 1rem 2rem;
+      padding: 4rem 1rem 2rem;
       color: white;
+      position: relative;
       text-align: center;
       overflow-x: hidden;
-      position: relative;
     }
-
     body::after {
       content: "";
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.25);
       z-index: 0;
       pointer-events: none;
     }
 
     h1 {
-      font-size: 2.2rem;
+      font-size: 2.5rem;
       margin-bottom: 1rem;
       z-index: 1;
       text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
     }
 
     .love-message {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       margin-bottom: 1.5rem;
       font-weight: 600;
       color: #a5d6a7;
@@ -52,8 +50,6 @@
       align-items: center;
       gap: 0.5rem;
       z-index: 1;
-      flex-wrap: wrap;
-      justify-content: center;
     }
 
     .heart-green {
@@ -72,59 +68,65 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 0.8rem;
+      gap: 1rem;
       font-weight: bold;
       text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
       z-index: 1;
     }
 
     .time-box {
-      background: rgba(0,0,0,0.5);
-      padding: 0.9rem 1.2rem;
+      background: rgba(0,0,0,0.4);
+      padding: 1rem 1.5rem;
       border-radius: 1rem;
-      min-width: 80px;
+      min-width: 90px;
       text-align: center;
       box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
 
     .number {
-      font-size: 1.8rem;
+      font-size: 2rem;
       color: #a5d6a7;
     }
 
     .label {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: #c8e6c9;
     }
 
     .floating-birthday-box {
       position: fixed;
-      bottom: 90px;
-      right: 20px;
+      bottom: 20px;
+      left: 20px;
       background: rgba(209, 78, 99, 0.95);
       color: white;
       padding: 1rem 1.2rem;
       border-radius: 1rem;
       box-shadow: 0 8px 16px rgba(0,0,0,0.4);
       text-align: center;
-      animation: float 3s ease-in-out infinite;
       z-index: 2;
-      max-width: 300px;
+      width: 240px;
+      max-width: 90%;
+      font-size: 0.95rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .floating-birthday-box h2 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
     }
 
     .birthday-timer {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.4rem;
       justify-content: center;
       flex-wrap: wrap;
-      margin-top: 0.5rem;
     }
 
     .birthday-unit {
       background: rgba(255,255,255,0.2);
       padding: 0.4rem;
       border-radius: 0.5rem;
-      min-width: 50px;
+      min-width: 45px;
       text-align: center;
     }
 
@@ -142,36 +144,22 @@
       50% { transform: translateY(-10px); }
     }
 
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 1.6rem;
-      }
-      .love-message {
-        font-size: 1.3rem;
-        flex-direction: column;
-        gap: 0.3rem;
-      }
-      .counter {
-        gap: 0.5rem;
-      }
-      .time-box {
-        padding: 0.6rem 1rem;
-        min-width: 70px;
-      }
-      .number {
-        font-size: 1.4rem;
-      }
-      .label {
-        font-size: 0.7rem;
-      }
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      .love-message { font-size: 1.4rem; flex-direction: column; gap: 0.2rem; }
+      .counter { gap: 0.5rem; }
+      .time-box { padding: 0.6rem 1rem; min-width: 70px; }
+      .number { font-size: 1.5rem; }
+      .label { font-size: 0.75rem; }
       .floating-birthday-box {
-        bottom: 80px;
-        right: 10px;
+        bottom: 10px;
+        left: 10px;
         padding: 0.8rem 1rem;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
+        width: 200px;
       }
       .birthday-unit {
-        min-width: 45px;
+        min-width: 40px;
         padding: 0.3rem;
       }
       .birthday-unit .num {
@@ -194,7 +182,7 @@
     <div class="birthday-timer" id="birthday-timer"></div>
   </div>
 
-  <!-- Script do chat flutuante -->
+  <!-- Chat flutuante -->
   <script async src="https://app.gptmaker.ai/widget/3E40A2B7B2F9224B1436FAB6FA94CC1E/float.js"></script>
 
   <script>
