@@ -197,21 +197,54 @@
 </script>
   <script>
     const startDate = new Date("2025-06-14T00:00:00");
-    function updateCounter() {
-      const now = new Date(), diff = now - startDate;
-      let s = Math.floor(diff/1000), m=Math.floor(s/60), h=Math.floor(m/60),
-          d=Math.floor(h/24), mo=Math.floor(d/30.4375), y=Math.floor(mo/12);
-      mo%=12; d%=30.4375|0; h%=24; m%=60; s%=60;
-      document.getElementById("counter").innerHTML = `
-        <div class="time-box"><div class="number">${y}</div><div class="label">Anos</div></div>
-        <div class="time-box"><div class="number">${mo}</div><div class="label">Meses</div></div>
-        <div class="time-box"><div class="number">${d}</div><div class="label">Dias</div></div>
-        <div class="time-box"><div class="number">${h}</div><div class="label">Horas</div></div>
-        <div class="time-box"><div class="number">${m}</div><div class="label">Minutos</div></div>
-        <div class="time-box"><div class="number">${s}</div><div class="label">Segundos</div></div>`;
-    }
-    updateCounter(); setInterval(updateCounter,1000);
 
+function updateCounter() {
+  const now = new Date();
+
+  let years = now.getFullYear() - startDate.getFullYear();
+  let months = now.getMonth() - startDate.getMonth();
+  let days = now.getDate() - startDate.getDate();
+  let hours = now.getHours() - startDate.getHours();
+  let minutes = now.getMinutes() - startDate.getMinutes();
+  let seconds = now.getSeconds() - startDate.getSeconds();
+
+  if (seconds < 0) {
+    seconds += 60;
+    minutes--;
+  }
+
+  if (minutes < 0) {
+    minutes += 60;
+    hours--;
+  }
+
+  if (hours < 0) {
+    hours += 24;
+    days--;
+  }
+
+  if (days < 0) {
+    const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+    days += prevMonth;
+    months--;
+  }
+
+  if (months < 0) {
+    months += 12;
+    years--;
+  }
+
+  document.getElementById("counter").innerHTML = `
+    <div class="time-box"><div class="number">${years}</div><div class="label">Anos</div></div>
+    <div class="time-box"><div class="number">${months}</div><div class="label">Meses</div></div>
+    <div class="time-box"><div class="number">${days}</div><div class="label">Dias</div></div>
+    <div class="time-box"><div class="number">${hours}</div><div class="label">Horas</div></div>
+    <div class="time-box"><div class="number">${minutes}</div><div class="label">Minutos</div></div>
+    <div class="time-box"><div class="number">${seconds}</div><div class="label">Segundos</div></div>`;
+}
+
+updateCounter();
+setInterval(updateCounter, 1000);
     const bdDate = new Date("2025-08-24T00:00:00");
     function updateBirthday() {
       const now = new Date(), diff=bdDate - now;
