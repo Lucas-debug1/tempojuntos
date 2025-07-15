@@ -148,6 +148,22 @@
       50% { transform: translateY(-10px); }
     }
 
+    #music-player {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.5);
+      padding: 10px;
+      border-radius: 1rem;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    #music-player audio {
+      width: 200px;
+      filter: brightness(1.2);
+    }
+
     @media (max-width: 768px) {
       h1 { font-size: 2rem; }
       .love-message { font-size: 1.4rem; flex-direction: column; gap: 0.2rem; }
@@ -169,6 +185,9 @@
       .birthday-unit .num {
         font-size: 1rem;
       }
+      #music-player audio {
+        width: 150px;
+      }
     }
   </style>
 </head>
@@ -185,24 +204,25 @@
     <h2>🎂 Aniversário da minha Princesa 💚</h2>
     <div class="birthday-timer" id="birthday-timer"></div>
   </div>
-  <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    localStorage.removeItem('gptmaker_widget_3E40B191D4C490018231B22FDC791FD9');
 
-    const script = document.createElement('script');
-    script.src = "https://app.gptmaker.ai/widget/3E40B191D4C490018231B22FDC791FD9/float.js";
-    script.async = true;
-    document.body.appendChild(script);
-  });
-</script>
-  <!-- ... todo o seu código permanece igual acima ... -->
-
+  <div id="music-player">
+  <audio controls loop>
+    <source src="https://media.vocaroo.com/mp3/1nWUhUgjHQ8L" type="audio/mpeg">
+    Seu navegador não suporta o elemento de áudio.
+  </audio>
+</div>
   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      localStorage.removeItem('gptmaker_widget_3E40B191D4C490018231B22FDC791FD9');
+      const script = document.createElement('script');
+      script.src = "https://app.gptmaker.ai/widget/3E40B191D4C490018231B22FDC791FD9/float.js";
+      script.async = true;
+      document.body.appendChild(script);
+    });
+
     const startDate = new Date("2025-06-14T00:00:00");
-
     function updateCounter() {
       const now = new Date();
-
       let years = now.getFullYear() - startDate.getFullYear();
       let months = now.getMonth() - startDate.getMonth();
       let days = now.getDate() - startDate.getDate();
@@ -210,31 +230,15 @@
       let minutes = now.getMinutes() - startDate.getMinutes();
       let seconds = now.getSeconds() - startDate.getSeconds();
 
-      if (seconds < 0) {
-        seconds += 60;
-        minutes--;
-      }
-
-      if (minutes < 0) {
-        minutes += 60;
-        hours--;
-      }
-
-      if (hours < 0) {
-        hours += 24;
-        days--;
-      }
-
+      if (seconds < 0) { seconds += 60; minutes--; }
+      if (minutes < 0) { minutes += 60; hours--; }
+      if (hours < 0) { hours += 24; days--; }
       if (days < 0) {
         const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
         days += prevMonth;
         months--;
       }
-
-      if (months < 0) {
-        months += 12;
-        years--;
-      }
+      if (months < 0) { months += 12; years--; }
 
       document.getElementById("counter").innerHTML = `
         <div class="time-box"><div class="number">${years}</div><div class="label">Anos</div></div>
@@ -250,25 +254,24 @@
 
     const bdDate = new Date("2025-08-24T00:00:00");
     function updateBirthday() {
-      const now = new Date(), diff=bdDate - now;
-      if(diff<0) {
+      const now = new Date(), diff = bdDate - now;
+      if (diff < 0) {
         document.getElementById("birthday-timer").innerHTML =
           `<div class="birthday-unit"><div class="num">🎉</div><div class="label">Chegou!</div></div>`;
         return clearInterval(bdInterval);
       }
-      const d=Math.floor(diff/86400000),
-            h=Math.floor((diff%86400000)/3600000),
-            m=Math.floor((diff%3600000)/60000),
-            s=Math.floor((diff%60000)/1000);
+      const d = Math.floor(diff / 86400000),
+            h = Math.floor((diff % 86400000) / 3600000),
+            m = Math.floor((diff % 3600000) / 60000),
+            s = Math.floor((diff % 60000) / 1000);
+
       document.getElementById("birthday-timer").innerHTML = `
         <div class="birthday-unit"><div class="num">${d}</div><div class="label">Dias</div></div>
         <div class="birthday-unit"><div class="num">${h.toString().padStart(2,'0')}</div><div class="label">Hrs</div></div>
         <div class="birthday-unit"><div class="num">${m.toString().padStart(2,'0')}</div><div class="label">Min</div></div>
         <div class="birthday-unit"><div class="num">${s.toString().padStart(2,'0')}</div><div class="label">Seg</div></div>`;
     }
-
-    updateBirthday(); 
-    const bdInterval = setInterval(updateBirthday,1000);
+    updateBirthday(); const bdInterval = setInterval(updateBirthday, 1000);
 
     const gifs = [
       'https://i.pinimg.com/originals/5d/b1/8e/5db18e2bf60cc7b6180733ff00b53821.gif',
@@ -279,43 +282,6 @@
       idx = (idx + 1) % gifs.length;
       document.documentElement.style.setProperty('--background-gif', `url('${gifs[idx]}')`);
     }, 10000);
-  </script>
-  <audio id="bg-music" loop>
-    <source src="https://media.vocaroo.com/mp3/1nWUhUgjHQ8L" type="audio/mpeg">
-  </audio>
-
-  <button id="music-toggle" style="
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 10;
-    background: rgba(0,0,0,0.6);
-    color: white;
-    border: none;
-    padding: 0.6rem 1rem;
-    border-radius: 1rem;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    font-size: 0.9rem;
-  ">
-    🔈 Música
-  </button>
-
-  <script>
-    const music = document.getElementById('bg-music');
-    const toggle = document.getElementById('music-toggle');
-    let isPlaying = false;
-
-    toggle.addEventListener('click', () => {
-      if (!isPlaying) {
-        music.play();
-        toggle.textContent = '🔇 Parar música';
-      } else {
-        music.pause();
-        toggle.textContent = '🔈 Música';
-      }
-      isPlaying = !isPlaying;
-    });
   </script>
 </body>
 </html>
