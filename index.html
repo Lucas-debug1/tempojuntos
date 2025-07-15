@@ -149,21 +149,24 @@
     }
 
     #music-player {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: rgba(0,0,0,0.5);
-      padding: 10px;
-      border-radius: 1rem;
-      z-index: 1000;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    }
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 0.5rem 0.7rem;
+  border-radius: 1.5rem;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
 
-    #music-player audio {
-      width: 200px;
-      filter: brightness(1.2);
-    }
-
+#music-player audio {
+  width: 180px;
+  height: 28px;
+  filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));
+  accent-color: #4caf50;
+  background: transparent;
+}
     @media (max-width: 768px) {
       h1 { font-size: 2rem; }
       .love-message { font-size: 1.4rem; flex-direction: column; gap: 0.2rem; }
