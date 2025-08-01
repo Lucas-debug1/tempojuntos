@@ -149,76 +149,105 @@
     }
 
     #music-player {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  padding: 0.5rem 1rem;
-  border-radius: 2rem;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  z-index: 1000;
-}
-
-#play-pause-btn {
-  background-color: #4caf50;
-  border: none;
-  color: white;
-  font-size: 1.2rem;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-#play-pause-btn:hover {
-  background-color: #45a049;
-}
-
-#progress-container {
-  flex: 1;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 3px;
-  overflow: hidden;
-  position: relative;
-}
-
-#progress-bar {
-  height: 100%;
-  background: #4caf50;
-  width: 0%;
-  transition: width 0.2s;
-}
-    @media (max-width: 768px) {
-      h1 { font-size: 2rem; }
-      .love-message { font-size: 1.4rem; flex-direction: column; gap: 0.2rem; }
-      .counter { gap: 0.5rem; }
-      .time-box { padding: 0.6rem 1rem; min-width: 70px; }
-      .number { font-size: 1.5rem; }
-      .label { font-size: 0.75rem; }
-      .floating-birthday-box {
-        bottom: 10px;
-        left: 10px;
-        padding: 0.8rem 1rem;
-        font-size: 0.85rem;
-        width: 200px;
-      }
-      .birthday-unit {
-        min-width: 40px;
-        padding: 0.3rem;
-      }
-      .birthday-unit .num {
-        font-size: 1rem;
-      }
-      #music-player audio {
-        width: 150px;
-      }
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      z-index: 1000;
     }
+
+    #play-pause-btn {
+      background-color: #4caf50;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #play-pause-btn:hover {
+      background-color: #45a049;
+    }
+
+    #progress-container {
+      flex: 1;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #progress-bar {
+      height: 100%;
+      background: #4caf50;
+      width: 0%;
+      transition: width 0.2s;
+    }
+
+    /* GALERIA DE FOTOS */
+.photo-gallery {
+  width: 100%;
+  max-width: 500px;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+  margin-top: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.gallery-track {
+  display: flex;
+  animation: scrollGallery 20s linear infinite;
+  width: fit-content;
+}
+
+.gallery-track img {
+  width: 100vw;
+  max-width: 500px;
+  height: 250px;
+  object-fit: cover;
+  flex-shrink: 0;
+  transition: transform 0.5s;
+  border-right: 2px solid rgba(255,255,255,0.1);
+}
+
+.photo-gallery:hover .gallery-track {
+  animation-play-state: paused;
+}
+
+@keyframes scrollGallery {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-400vw); } /* 4 imagens * 100vw */
+}
+
+@media (max-width: 768px) {
+  .photo-gallery {
+    height: 180px;
+  }
+
+  .gallery-track img {
+    height: 180px;
+    width: 100vw;
+  }
+
+  @keyframes scrollGallery {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-400vw); }
+  }
+}
   </style>
 </head>
 <body>
@@ -230,27 +259,28 @@
   <h1>Estamos juntos há...</h1>
   <div class="counter" id="counter"></div>
 
+  <!-- GALERIA DE FOTOS -->
+  <div class="photo-gallery">
+    <div class="gallery-track">
+      <img src="fotos/1.jpg" alt="Foto 1">
+      <img src="fotos/2.jpg" alt="Foto 2">
+      <img src="fotos/3.jpg" alt="Foto 3">
+      <img src="fotos/4.jpg" alt="Foto 4">
+    </div>
+  </div>
+
   <div class="floating-birthday-box" id="birthday-box">
     <h2>🎂 Aniversário da minha Princesa 💚</h2>
     <div class="birthday-timer" id="birthday-timer"></div>
   </div>
 
   <div id="music-player">
-  <button id="play-pause-btn">▶️</button>
-  <div id="progress-container">
-    <div id="progress-bar"></div>
+    <button id="play-pause-btn" aria-label="Tocar ou pausar música">▶️</button>
+    <div id="progress-container"><div id="progress-bar"></div></div>
+    <audio id="audio" src="https://media.vocaroo.com/mp3/1nWUhUgjHQ8L" preload="auto"></audio>
   </div>
-  <audio id="audio" src="https://media.vocaroo.com/mp3/1nWUhUgjHQ8L" preload="auto"></audio>
-</div>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      localStorage.removeItem('gptmaker_widget_3E40B191D4C490018231B22FDC791FD9');
-      const script = document.createElement('script');
-      script.src = "https://app.gptmaker.ai/widget/3E40B191D4C490018231B22FDC791FD9/float.js";
-      script.async = true;
-      document.body.appendChild(script);
-    });
 
+  <script>
     const startDate = new Date("2025-06-14T00:00:00");
     function updateCounter() {
       const now = new Date();
@@ -279,7 +309,6 @@
         <div class="time-box"><div class="number">${minutes}</div><div class="label">Minutos</div></div>
         <div class="time-box"><div class="number">${seconds}</div><div class="label">Segundos</div></div>`;
     }
-
     updateCounter();
     setInterval(updateCounter, 1000);
 
@@ -313,24 +342,27 @@
       idx = (idx + 1) % gifs.length;
       document.documentElement.style.setProperty('--background-gif', `url('${gifs[idx]}')`);
     }, 10000);
+
     const audio = document.getElementById('audio');
-const playPauseBtn = document.getElementById('play-pause-btn');
-const progressBar = document.getElementById('progress-bar');
+    const playPauseBtn = document.getElementById('play-pause-btn');
+    const progressBar = document.getElementById('progress-bar');
 
-playPauseBtn.addEventListener('click', () => {
-  if (audio.paused) {
-    audio.play();
-    playPauseBtn.textContent = '⏸️';
-  } else {
-    audio.pause();
-    playPauseBtn.textContent = '▶️';
-  }
-});
+    playPauseBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        playPauseBtn.textContent = '⏸️';
+      } else {
+        audio.pause();
+        playPauseBtn.textContent = '▶️';
+      }
+    });
 
-audio.addEventListener('timeupdate', () => {
-  const progress = (audio.currentTime / audio.duration) * 100;
-  progressBar.style.width = `${progress}%`;
-});
+    audio.addEventListener('timeupdate', () => {
+      if (!isNaN(audio.duration)) {
+        const progress = (audio.currentTime / audio.duration) * 100;
+        progressBar.style.width = `${progress}%`;
+      }
+    });
   </script>
 </body>
 </html>
