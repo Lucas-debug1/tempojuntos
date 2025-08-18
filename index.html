@@ -17,7 +17,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       padding: 4rem 1rem 2rem;
       color: white;
       position: relative;
@@ -91,6 +91,25 @@
     .label {
       font-size: 0.9rem;
       color: #c8e6c9;
+    }
+
+    /* FOTO */
+    .photo-container {
+      max-width: 320px;
+      width: 85%;
+      margin: 1.5rem auto;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+      z-index: 1;
+    }
+
+    .photo-container img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      border-radius: 1rem;
     }
 
     .floating-birthday-box {
@@ -195,11 +214,6 @@
       transition: width 0.2s;
     }
 
-    @keyframes scrollGallery {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-400vw); }
-    }
-
     /* ===== CELEBRAÇÃO ===== */
     #celebration-container {
       position: fixed;
@@ -209,7 +223,6 @@
       z-index: 9999;
     }
 
-    /* Balões 🎈 */
     .balloon {
       position: absolute;
       bottom: -100px;
@@ -225,7 +238,6 @@
       100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
     }
 
-    /* Fogos 🎆 */
     .firework {
       position: absolute;
       width: 5px;
@@ -255,6 +267,11 @@
 
   <h1>Estamos juntos há...</h1>
   <div class="counter" id="counter"></div>
+
+  <!-- FOTO -->
+  <div class="photo-container">
+    <img src="1000497344.jpg" alt="Nós dois 💚" />
+  </div>
 
   <div class="floating-birthday-box" id="birthday-box">
     <h2>🎂 Aniversário da minha Princesa 💚</h2>
@@ -305,7 +322,6 @@
       celebrationContainer.id = "celebration-container";
       document.body.appendChild(celebrationContainer);
 
-      // Balões
       setInterval(() => {
         const balloon = document.createElement("div");
         balloon.className = "balloon";
@@ -315,7 +331,6 @@
         setTimeout(() => balloon.remove(), 6000);
       }, 800);
 
-      // Fogos
       setInterval(() => {
         const firework = document.createElement("div");
         firework.className = "firework";
@@ -333,7 +348,7 @@
         document.getElementById("birthday-timer").innerHTML =
           `<div class="birthday-unit"><div class="num">🎉</div><div class="label">Chegou!</div></div>`;
         clearInterval(bdInterval);
-        startCelebration(); // 🎈🎆 inicia balões e fogos
+        startCelebration();
         return;
       }
       const d = Math.floor(diff / 86400000),
