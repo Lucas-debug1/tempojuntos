@@ -194,10 +194,57 @@
       width: 0%;
       transition: width 0.2s;
     }
-  @keyframes scrollGallery {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-400vw); }
-  }
+
+    @keyframes scrollGallery {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-400vw); }
+    }
+
+    /* ===== CELEBRAÇÃO ===== */
+    #celebration-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 9999;
+    }
+
+    /* Balões 🎈 */
+    .balloon {
+      position: absolute;
+      bottom: -100px;
+      width: 30px;
+      height: 40px;
+      border-radius: 50% 50% 50% 50%;
+      animation: floatUp 6s linear forwards;
+      opacity: 0.9;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+    }
+
+    /* Fogos 🎆 */
+    .firework {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: transparent;
+      border-radius: 50%;
+      box-shadow: 0 0 20px 5px yellow, 
+                  30px 0 20px red, 
+                  -30px 0 20px blue,
+                  0 30px 20px green,
+                  0 -30px 20px pink;
+      animation: explode 1.5s ease-out forwards;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(0); opacity: 1; }
+      80% { transform: scale(1.5); opacity: 1; }
+      100% { transform: scale(2); opacity: 0; }
+    }
   </style>
 </head>
 <body>
@@ -252,13 +299,42 @@
     updateCounter();
     setInterval(updateCounter, 1000);
 
+    // 🎉 CELEBRAÇÃO
+    function startCelebration() {
+      const celebrationContainer = document.createElement("div");
+      celebrationContainer.id = "celebration-container";
+      document.body.appendChild(celebrationContainer);
+
+      // Balões
+      setInterval(() => {
+        const balloon = document.createElement("div");
+        balloon.className = "balloon";
+        balloon.style.left = Math.random() * 100 + "vw";
+        balloon.style.background = `hsl(${Math.random() * 360}, 70%, 60%)`;
+        celebrationContainer.appendChild(balloon);
+        setTimeout(() => balloon.remove(), 6000);
+      }, 800);
+
+      // Fogos
+      setInterval(() => {
+        const firework = document.createElement("div");
+        firework.className = "firework";
+        firework.style.left = Math.random() * 100 + "vw";
+        firework.style.top = Math.random() * 50 + "vh";
+        celebrationContainer.appendChild(firework);
+        setTimeout(() => firework.remove(), 2000);
+      }, 2000);
+    }
+
     const bdDate = new Date("2025-08-24T00:00:00");
     function updateBirthday() {
       const now = new Date(), diff = bdDate - now;
       if (diff < 0) {
         document.getElementById("birthday-timer").innerHTML =
           `<div class="birthday-unit"><div class="num">🎉</div><div class="label">Chegou!</div></div>`;
-        return clearInterval(bdInterval);
+        clearInterval(bdInterval);
+        startCelebration(); // 🎈🎆 inicia balões e fogos
+        return;
       }
       const d = Math.floor(diff / 86400000),
             h = Math.floor((diff % 86400000) / 3600000),
