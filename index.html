@@ -112,108 +112,6 @@
       border-radius: 1rem;
     }
 
-    .floating-birthday-box {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background: rgba(209, 78, 99, 0.95);
-      color: white;
-      padding: 0.7rem 1rem;
-      border-radius: 1rem;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-      text-align: center;
-      z-index: 2;
-      width: auto;
-      max-width: 95%;
-      font-size: 0.85rem;
-      animation: float 3s ease-in-out infinite;
-    }
-
-    .floating-birthday-box h2 {
-      font-size: 0.85rem;
-      margin-bottom: 0.5rem;
-      line-height: 1;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .birthday-timer {
-      display: flex;
-      gap: 0.4rem;
-      justify-content: center;
-      flex-wrap: nowrap;
-    }
-
-    .birthday-unit {
-      background: rgba(255,255,255,0.15);
-      padding: 0.4rem 0.5rem;
-      border-radius: 0.5rem;
-      min-width: 55px;
-      text-align: center;
-    }
-
-    .birthday-unit .num {
-      font-size: 1rem;
-      font-weight: bold;
-    }
-
-    .birthday-unit .label {
-      font-size: 0.65rem;
-    }
-
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    #music-player {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
-      padding: 0.5rem 1rem;
-      border-radius: 2rem;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      z-index: 1000;
-    }
-
-    #play-pause-btn {
-      background-color: #4caf50;
-      border: none;
-      color: white;
-      font-size: 1.2rem;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    #play-pause-btn:hover {
-      background-color: #45a049;
-    }
-
-    #progress-container {
-      flex: 1;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 3px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    #progress-bar {
-      height: 100%;
-      background: #4caf50;
-      width: 0%;
-      transition: width 0.2s;
-    }
-
     /* ===== CELEBRAÇÃO ===== */
     #celebration-container {
       position: fixed;
@@ -273,17 +171,6 @@
     <img src="1000497344.jpg" alt="Nós dois 💚" />
   </div>
 
-  <div class="floating-birthday-box" id="birthday-box">
-    <h2>🎂 Aniversário da minha Princesa 💚</h2>
-    <div class="birthday-timer" id="birthday-timer"></div>
-  </div>
-
-  <div id="music-player">
-    <button id="play-pause-btn" aria-label="Tocar ou pausar música">▶️</button>
-    <div id="progress-container"><div id="progress-bar"></div></div>
-    <audio id="audio" src="https://media.vocaroo.com/mp3/1nWUhUgjHQ8L" preload="auto"></audio>
-  </div>
-
   <script>
     const startDate = new Date("2025-06-14T00:00:00");
     function updateCounter() {
@@ -316,54 +203,7 @@
     updateCounter();
     setInterval(updateCounter, 1000);
 
-    // 🎉 CELEBRAÇÃO
-    function startCelebration() {
-      const celebrationContainer = document.createElement("div");
-      celebrationContainer.id = "celebration-container";
-      document.body.appendChild(celebrationContainer);
-
-      setInterval(() => {
-        const balloon = document.createElement("div");
-        balloon.className = "balloon";
-        balloon.style.left = Math.random() * 100 + "vw";
-        balloon.style.background = `hsl(${Math.random() * 360}, 70%, 60%)`;
-        celebrationContainer.appendChild(balloon);
-        setTimeout(() => balloon.remove(), 6000);
-      }, 800);
-
-      setInterval(() => {
-        const firework = document.createElement("div");
-        firework.className = "firework";
-        firework.style.left = Math.random() * 100 + "vw";
-        firework.style.top = Math.random() * 50 + "vh";
-        celebrationContainer.appendChild(firework);
-        setTimeout(() => firework.remove(), 2000);
-      }, 2000);
-    }
-
-    const bdDate = new Date("2025-08-24T00:00:00");
-    function updateBirthday() {
-      const now = new Date(), diff = bdDate - now;
-      if (diff < 0) {
-        document.getElementById("birthday-timer").innerHTML =
-          `<div class="birthday-unit"><div class="num">🎉</div><div class="label">Chegou!</div></div>`;
-        clearInterval(bdInterval);
-        startCelebration();
-        return;
-      }
-      const d = Math.floor(diff / 86400000),
-            h = Math.floor((diff % 86400000) / 3600000),
-            m = Math.floor((diff % 3600000) / 60000),
-            s = Math.floor((diff % 60000) / 1000);
-
-      document.getElementById("birthday-timer").innerHTML = `
-        <div class="birthday-unit"><div class="num">${d}</div><div class="label">Dias</div></div>
-        <div class="birthday-unit"><div class="num">${h.toString().padStart(2,'0')}</div><div class="label">Hrs</div></div>
-        <div class="birthday-unit"><div class="num">${m.toString().padStart(2,'0')}</div><div class="label">Min</div></div>
-        <div class="birthday-unit"><div class="num">${s.toString().padStart(2,'0')}</div><div class="label">Seg</div></div>`;
-    }
-    updateBirthday(); const bdInterval = setInterval(updateBirthday, 1000);
-
+    // 🎉 EFEITO DE FUNDO
     const gifs = [
       'https://i.pinimg.com/originals/5d/b1/8e/5db18e2bf60cc7b6180733ff00b53821.gif',
       'https://64.media.tumblr.com/5bf1a035e041d1d7b7bdf5ccde2c1aba/tumblr_o9eplefSf31vnc4axo1_500.gifv'
@@ -373,27 +213,6 @@
       idx = (idx + 1) % gifs.length;
       document.documentElement.style.setProperty('--background-gif', `url('${gifs[idx]}')`);
     }, 10000);
-
-    const audio = document.getElementById('audio');
-    const playPauseBtn = document.getElementById('play-pause-btn');
-    const progressBar = document.getElementById('progress-bar');
-
-    playPauseBtn.addEventListener('click', () => {
-      if (audio.paused) {
-        audio.play();
-        playPauseBtn.textContent = '⏸️';
-      } else {
-        audio.pause();
-        playPauseBtn.textContent = '▶️';
-      }
-    });
-
-    audio.addEventListener('timeupdate', () => {
-      if (!isNaN(audio.duration)) {
-        const progress = (audio.currentTime / audio.duration) * 100;
-        progressBar.style.width = `${progress}%`;
-      }
-    });
   </script>
 </body>
 </html>
