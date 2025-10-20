@@ -8,6 +8,7 @@
     :root {
       --background-gif: url('https://i.pinimg.com/originals/5d/b1/8e/5db18e2bf60cc7b6180733ff00b53821.gif');
     }
+
     body {
       margin: 0;
       font-family: sans-serif;
@@ -24,6 +25,7 @@
       text-align: center;
       overflow-x: hidden;
     }
+
     body::after {
       content: "";
       position: fixed;
@@ -112,6 +114,40 @@
       border-radius: 1rem;
     }
 
+    /* ===== TELA INICIAL ===== */
+    #intro-screen {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 1.5s ease;
+    }
+
+    #intro-screen.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .intro-text {
+      color: #a5d6a7;
+      font-size: 2.2rem;
+      font-weight: bold;
+      text-shadow: 0 0 20px #4caf50;
+      animation: fadeInText 2.5s ease-in-out;
+      text-align: center;
+    }
+
+    @keyframes fadeInText {
+      0% { opacity: 0; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.05); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
     /* ===== CELEBRAÇÃO ===== */
     #celebration-container {
       position: fixed;
@@ -126,7 +162,7 @@
       bottom: -100px;
       width: 30px;
       height: 40px;
-      border-radius: 50% 50% 50% 50%;
+      border-radius: 50%;
       animation: floatUp 6s linear forwards;
       opacity: 0.9;
     }
@@ -158,6 +194,12 @@
   </style>
 </head>
 <body>
+  <!-- Tela inicial -->
+  <div id="intro-screen">
+    <div class="intro-text">Oi, minha Sarinha 💚</div>
+  </div>
+
+  <!-- Mensagem principal -->
   <div class="love-message">
     Eu te amo, minha Sarinha
     <span class="heart-green">💚</span>
@@ -172,6 +214,14 @@
   </div>
 
   <script>
+    // ===== TELA INICIAL =====
+    const intro = document.getElementById("intro-screen");
+    setTimeout(() => {
+      intro.classList.add("fade-out");
+      setTimeout(() => intro.remove(), 1500);
+    }, 3500); // 3,5 segundos de exibição
+
+    // ===== CONTADOR =====
     const startDate = new Date("2025-06-14T00:00:00");
     function updateCounter() {
       const now = new Date();
@@ -203,7 +253,7 @@
     updateCounter();
     setInterval(updateCounter, 1000);
 
-    // 🎉 EFEITO DE FUNDO
+    // ===== FUNDO ALTERNANTE =====
     const gifs = [
       'https://i.pinimg.com/originals/5d/b1/8e/5db18e2bf60cc7b6180733ff00b53821.gif',
       'https://64.media.tumblr.com/5bf1a035e041d1d7b7bdf5ccde2c1aba/tumblr_o9eplefSf31vnc4axo1_500.gifv'
@@ -213,6 +263,12 @@
       idx = (idx + 1) % gifs.length;
       document.documentElement.style.setProperty('--background-gif', `url('${gifs[idx]}')`);
     }, 10000);
+  </script>
+
+  <!-- Script GPTMaker -->
+  <script 
+    async 
+    src="https://app.gptmaker.ai/widget/3E40B191D4C490018231B22FDC791FD9/float.js">
   </script>
 </body>
 </html>
