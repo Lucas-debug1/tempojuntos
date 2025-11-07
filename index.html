@@ -148,48 +148,13 @@
       100% { opacity: 1; transform: scale(1); }
     }
 
-    /* ===== CELEBRAÇÃO ===== */
-    #celebration-container {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 9999;
-    }
-
-    .balloon {
-      position: absolute;
-      bottom: -100px;
-      width: 30px;
-      height: 40px;
-      border-radius: 50%;
-      animation: floatUp 6s linear forwards;
-      opacity: 0.9;
-    }
-
-    @keyframes floatUp {
-      0% { transform: translateY(0) scale(1); opacity: 1; }
-      100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
-    }
-
-    .firework {
-      position: absolute;
-      width: 5px;
-      height: 5px;
-      background: transparent;
-      border-radius: 50%;
-      box-shadow: 0 0 20px 5px yellow, 
-                  30px 0 20px red, 
-                  -30px 0 20px blue,
-                  0 30px 20px green,
-                  0 -30px 20px pink;
-      animation: explode 1.5s ease-out forwards;
-    }
-
-    @keyframes explode {
-      0% { transform: scale(0); opacity: 1; }
-      80% { transform: scale(1.5); opacity: 1; }
-      100% { transform: scale(2); opacity: 0; }
+    /* ===== JOGO DA CAPIVARA ===== */
+    #capivara-game {
+      background: linear-gradient(to top, #a5d6a7 20%, #e8f5e9 100%);
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      margin-bottom: 2rem;
+      z-index: 2;
     }
   </style>
 </head>
@@ -205,6 +170,9 @@
     <span class="heart-green">💚</span>
   </div>
 
+  <!-- Jogo da Capivara -->
+  <canvas id="capivara-game" width="600" height="150"></canvas>
+
   <h1>Estamos juntos há...</h1>
   <div class="counter" id="counter"></div>
 
@@ -219,7 +187,7 @@
     setTimeout(() => {
       intro.classList.add("fade-out");
       setTimeout(() => intro.remove(), 1500);
-    }, 3500); // 3,5 segundos de exibição
+    }, 3500);
 
     // ===== CONTADOR =====
     const startDate = new Date("2025-06-14T00:00:00");
@@ -263,6 +231,69 @@
       idx = (idx + 1) % gifs.length;
       document.documentElement.style.setProperty('--background-gif', `url('${gifs[idx]}')`);
     }, 10000);
+
+    // ===== JOGO DA CAPIVARA =====
+    const canvas = document.getElementById("capivara-game");
+    const ctx = canvas.getContext("2d");
+
+    let capivaraImg = new Image();
+    capivaraImg.src = "https://i.imgur.com/xipRq3O.png"; // 🦫 Capivara sprite
+    let cactusImg = new Image();
+    cactusImg.src = "https://i.imgur.com/tRmxo8K.png"; // 🌵 Obstáculo
+
+    let capivara = { x: 50, y: 100, width: 44, height: 44, vy: 0, jumping: false };
+    let gravity = 0.8;
+    let ground = 130;
+    let obstacles = [];
+    let frame = 0;
+    let speed = 4;
+
+    function drawCapivara() {
+      ctx.drawImage(capivaraImg, capivara.x, capivara.y, capivara.width, capivara.height);
+    }
+
+    function drawObstacles() {
+      obstacles.forEach((obs) => {
+        ctx.drawImage(cactusImg, obs.x, obs.y, obs.width, obs.height);
+      });
+    }
+
+    function updateGame() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#81c784";
+      ctx.fillRect(0, ground, canvas.width, 20);
+
+      capivara.y += capivara.vy;
+      if (capivara.y + capivara.height < ground) {
+        capivara.vy += gravity;
+      } else {
+        capivara.y = ground - capivara.height;
+        capivara.vy = 0;
+        capivara.jumping = false;
+      }
+
+      obstacles.forEach((obs) => (obs.x -= speed));
+      if (frame % 120 === 0) {
+        obstacles.push({ x: canvas.width, y: ground - 30, width: 25, height: 30 });
+      }
+      obstacles = obstacles.filter((obs) => obs.x + obs.width > 0);
+
+      drawCapivara();
+      drawObstacles();
+
+      frame++;
+      requestAnimationFrame(updateGame);
+    }
+
+    // Pula automaticamente a cada 3 segundos
+    setInterval(() => {
+      if (!capivara.jumping) {
+        capivara.vy = -10;
+        capivara.jumping = true;
+      }
+    }, 3000);
+
+    capivaraImg.onload = updateGame;
   </script>
 
   <!-- Script GPTMaker -->
