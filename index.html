@@ -15,12 +15,11 @@
       font-family: sans-serif;
       min-height: 100vh;
       background: var(--background-gif) no-repeat center center/cover;
-      transition: background-image 1s ease-in-out;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      padding: 4rem 1rem 2rem;
+      justify-content: space-between;
+      padding: 3.5rem 1rem 1rem;
       color: white;
       position: relative;
       text-align: center;
@@ -37,34 +36,19 @@
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.4rem;
       margin-bottom: 1rem;
       z-index: 1;
       text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
     }
 
-    .love-message {
-      font-size: 1.8rem;
-      margin-bottom: 1.5rem;
-      font-weight: 600;
-      color: #a5d6a7;
-      text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+    .freeze-text {
+      font-size: 1.4rem;
+      color: #e8f5e9;
+      margin-bottom: 1.6rem;
       z-index: 1;
-    }
-
-    .heart-green {
-      color: #4caf50;
-      font-size: 2.2rem;
-      animation: pulseGreen 1.5s infinite;
-    }
-
-    @keyframes pulseGreen {
-      0% { transform: scale(1); text-shadow: 0 0 8px #4caf50aa; }
-      50% { transform: scale(1.2); text-shadow: 0 0 15px #4caf50ff; }
-      100% { transform: scale(1); text-shadow: 0 0 8px #4caf50aa; }
+      font-style: italic;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.8);
     }
 
     .counter {
@@ -92,14 +76,14 @@
     }
 
     .label {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #c8e6c9;
     }
 
     .photo-container {
       max-width: 320px;
       width: 85%;
-      margin: 1.5rem auto;
+      margin: 2rem auto 1rem;
       border-radius: 1rem;
       overflow: hidden;
       box-shadow: 0 6px 16px rgba(0,0,0,0.5);
@@ -114,124 +98,39 @@
       border-radius: 1rem;
     }
 
-    /* ===== TELA INICIAL ===== */
-    #intro-screen {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      z-index: 9999;
-      opacity: 1;
-      transition: opacity 1.5s ease;
+    .footer-note {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.65);
+      margin-top: 1rem;
+      z-index: 1;
+      font-style: italic;
     }
-
-    #intro-screen.fade-out {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .intro-text {
-      color: #a5d6a7;
-      font-size: 2.2rem;
-      font-weight: bold;
-      text-shadow: 0 0 20px #4caf50;
-      animation: fadeInText 2.5s ease-in-out;
-      text-align: center;
-    }
-
-    @keyframes fadeInText {
-      0% { opacity: 0; transform: scale(0.8); }
-      50% { opacity: 1; transform: scale(1.05); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    /* ===== JOGO (CSS CORRIGIDO E EM LUGAR CERTO) ===== */
-    #jogo-container {
-      text-align: center;
-      margin-top: 20px;
-      z-index: 2;
-    }
-
-    #capivara-game {
-      background: linear-gradient(to top, #a5d6a7 0%, #c8e6c9 40%, #e8f5e9 60%);
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-      max-width: 90vw;
-      height: auto;
-    }
-
-    #score {
-      color: white;
-      font-family: "Poppins", sans-serif;
-      font-size: 1.1rem;
-      margin-top: 6px;
-    }
-
-    #restart-btn {
-      background: #4caf50;
-      border: none;
-      color: white;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 0.95rem;
-      margin-top: 8px;
-      display: none;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    }
-
   </style>
 </head>
 
 <body>
-  <!-- Tela inicial -->
-  <div id="intro-screen">
-    <div class="intro-text">Oi, minha Sarinha 💚</div>
+
+  <div>
+    <div class="freeze-text">⏸O tempo parou aqui.</div>
+
+    <h1>Estavamos juntos há...</h1>
+    <div class="counter" id="counter"></div>
+
+    <div class="photo-container">
+      <img src="1000497344.jpg" alt="lembranças 💚" />
+    </div>
   </div>
 
-  <!-- Mensagem principal -->
-  <div class="love-message">
-    Eu te amo, minha Sarinha
-    <span class="heart-green">💚</span>
+  <div class="footer-note">
+    Projeto finalizado e abandonado 12/02/26
   </div>
-
-  <!-- ===== JOGO DA CAPIVARA ===== -->
-  <div id="jogo-container">
-    <h2 style="color:#fff;font-family:'Poppins',sans-serif;font-weight:600;">🦫 Joguinho da Capivara 💚</h2>
-    <canvas id="capivara-game" width="600" height="200"></canvas>
-    <p id="score">Pontos: 0</p>
-    <button id="restart-btn">Reiniciar 💚</button>
-  </div>
-
-  <h1>Estamos juntos há...</h1>
-  <div class="counter" id="counter"></div>
-
-  <div class="photo-container">
-    <img src="1000497344.jpg" alt="Nós dois 💚" />
-  </div>
-
-
-  <!-- ========================================================= -->
-  <!-- =============   SCRIPT PRINCIPAL CORRIGIDO   ============ -->
-  <!-- ========================================================= -->
 
   <script>
-    /* ======= TELA INICIAL ======= */
-    const intro = document.getElementById("intro-screen");
-    setTimeout(() => {
-      intro.classList.add("fade-out");
-      setTimeout(() => intro.remove(), 1500);
-    }, 3500);
-
-    /* ======= CONTADOR ======= */
     const startDate = new Date("2025-06-14T00:00:00");
 
     function updateCounter() {
-      const now = new Date();
+      const now = new Date("2026-01-05T00:00:00");
+
       let years = now.getFullYear() - startDate.getFullYear();
       let months = now.getMonth() - startDate.getMonth();
       let days = now.getDate() - startDate.getDate();
@@ -257,122 +156,8 @@
         <div class="time-box"><div class="number">${minutes}</div><div class="label">Minutos</div></div>
         <div class="time-box"><div class="number">${seconds}</div><div class="label">Segundos</div></div>`;
     }
+
     updateCounter();
-    setInterval(updateCounter, 1000);
-
-    /* ======= FUNDO ALTERNANTE ======= */
-    const gifs = [
-      'https://i.pinimg.com/originals/5d/b1/8e/5db18e2bf60cc7b6180733ff00b53821.gif',
-      'https://64.media.tumblr.com/5bf1a035e041d1d7b7bdf5ccde2c1aba/tumblr_o9eplefSf31vnc4axo1_500.gifv'
-    ];
-    let idx = 0;
-
-    setInterval(() => {
-      idx = (idx + 1) % gifs.length;
-      document.documentElement.style.setProperty('--background-gif', `url('${gifs[idx]}')`);
-    }, 10000);
-
-  </script>
-
-
-  <!-- SCRIPT DO JOGO (AGORA FORA DO OUTRO SCRIPT, CORRIGIDO) -->
-  <script>
-    const canvas = document.getElementById("capivara-game");
-    const ctx = canvas.getContext("2d");
-    const scoreEl = document.getElementById("score");
-    const restartBtn = document.getElementById("restart-btn");
-
-    function ajustarCanvas() {
-      const largura = Math.min(window.innerWidth * 0.9, 600);
-      const altura = largura / 4.5;
-      canvas.width = largura;
-      canvas.height = altura;
-    }
-    ajustarCanvas();
-    window.addEventListener("resize", ajustarCanvas);
-
-    let capivara = { x: 50, y: 0, vy: 0, jumping: false };
-    let cactos = [];
-    let pontos = 0;
-    let gameOver = false;
-    const gravidade = 0.8;
-
-    function resetar() {
-      pontos = 0;
-      cactos = [];
-      gameOver = false;
-      capivara = { x: 50, y: canvas.height - 25, vy: 0, jumping: false };
-      restartBtn.style.display = "none";
-      scoreEl.textContent = "Pontos: 0";
-      atualizar();
-    }
-
-    function desenharCapivara() {
-      ctx.font = `${Math.floor(canvas.height / 5)}px Arial`;
-      ctx.fillText("🦫", capivara.x, capivara.y);
-    }
-
-    function desenharCactos() {
-      ctx.font = `${Math.floor(canvas.height / 8)}px Arial`;
-      for (let c of cactos) ctx.fillText("🌵", c.x, c.y);
-    }
-
-    function atualizar() {
-      if (gameOver) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      capivara.y += capivara.vy;
-      capivara.vy += gravidade;
-
-      const chao = canvas.height - 25;
-      if (capivara.y > chao) {
-        capivara.y = chao;
-        capivara.jumping = false;
-      }
-
-      for (let c of cactos) c.x -= Math.max(3, canvas.width / 160);
-
-      if (cactos.length && cactos[0].x < -20) {
-        cactos.shift();
-        pontos++;
-        scoreEl.textContent = "Pontos: " + pontos;
-      }
-
-      if (Math.random() < 0.02)
-        cactos.push({ x: canvas.width, y: canvas.height - 25 });
-
-      for (let c of cactos) {
-        if (Math.abs(c.x - capivara.x) < 20 && Math.abs(c.y - capivara.y) < 20) {
-          gameOver = true;
-          scoreEl.innerHTML = "💔 Fim de jogo! Pontos: " + pontos;
-          restartBtn.style.display = "inline-block";
-        }
-      }
-
-      desenharCapivara();
-      desenharCactos();
-      requestAnimationFrame(atualizar);
-    }
-
-    function pular() {
-      if (!capivara.jumping && !gameOver) {
-        capivara.vy = -10;
-        capivara.jumping = true;
-      }
-    }
-
-    window.addEventListener("keydown", e => { if (e.code === "Space") pular(); });
-    canvas.addEventListener("click", pular);
-    canvas.addEventListener("touchstart", pular);
-    restartBtn.addEventListener("click", resetar);
-
-    resetar();
-  </script>
-
-  <!-- Script GPTMaker -->
-  <script 
-    async 
-    src="https://app.gptmaker.ai/widget/3E40B191D4C490018231B22FDC791FD9/float.js">
   </script>
 
 </body>
