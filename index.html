@@ -99,10 +99,9 @@
       border-radius: 1rem;
     }
 
-    /* ALTERAÇÃO AQUI */
     .footer-note {
-      font-size: 0.9rem;   /* um pouco maior */
-      color: #000;         /* preto */
+      font-size: 0.9rem;
+      color: #000;
       margin-top: 1rem;
       z-index: 1;
       font-style: italic;
@@ -138,7 +137,8 @@
     const startDate = new Date("2025-06-14T00:00:00");
 
     function updateCounter() {
-      const now = new Date("2026-01-05T00:00:00");
+      // TEMPO CONGELADO AQUI
+      const now = new Date("2026-01-05T16:42:00");
 
       let years = now.getFullYear() - startDate.getFullYear();
       let months = now.getMonth() - startDate.getMonth();
