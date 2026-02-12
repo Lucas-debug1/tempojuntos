@@ -14,6 +14,7 @@
       margin: 0;
       font-family: sans-serif;
       min-height: 100vh;
+      background-color: #000;
       background: var(--background-gif) no-repeat center center/cover;
       display: flex;
       flex-direction: column;
@@ -98,26 +99,30 @@
       border-radius: 1rem;
     }
 
+    /* ALTERAÇÃO AQUI */
     .footer-note {
-      font-size: 0.75rem;
-      color: rgba(255, 255, 255, 0.65);
+      font-size: 0.9rem;   /* um pouco maior */
+      color: #000;         /* preto */
       margin-top: 1rem;
       z-index: 1;
       font-style: italic;
+      text-shadow: none;
     }
   </style>
 </head>
+
 <!-- Chatbot GPTMaker -->
 <script 
   async 
   src="https://app.gptmaker.ai/widget/3E40B191D4C490018231B22FDC791FD9/float.js">
 </script>
+
 <body>
 
   <div>
-    <div class="freeze-text">⏸O tempo parou aqui.</div>
+    <div class="freeze-text">⏸ O tempo parou aqui.</div>
 
-    <h1>Estavamos juntos há...</h1>
+    <h1>Estávamos juntos há...</h1>
     <div class="counter" id="counter"></div>
 
     <div class="photo-container">
